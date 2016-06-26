@@ -1,37 +1,41 @@
 (function() {
     'use strict';
-    console.log('bgTabHlpr >> Initializing content.js script...');
+    console.log('bgTabHlpr >> Running content.js script...');
     /**
      * extracting links from DOM based on specific algorithm
      * @param  {String} linkClass css class
      * @return {Array}           array of links
      */
-    function extractLinks(linkClass) {
+    function extractLinks() {
+        console.log('bgTabOpnr >> Extracting links...');
+        var linkClass = 'tag-list';
         var list_node = document.getElementsByClassName(linkClass);
         var res = [];
         for (var i = 0; i < list_node.length; i++) {
             var url = list_node[i].children[1].children[0].href;
             res.push(url);
         }
+        console.log('bgTabOpnr >> Number of extracted links: ' + res.length);
         return res;
     }
     /**
-     * listening for start and end vars from background.js
-     * @param  {Object} request       object containing passed vars
-     * @param  {Object} sender        object containing sender meta data
-     * @param  {Object} sendResponse  object sent back to background.js
+     * port connecting to background.js
+     * @type {Object}
      */
-    chrome.runtime.onMessage.addListener(
-        function(request, sender, sendResponse) {
-            console.log('bgTabHlpr >> Extracting links...');
-            var links = extractLinks(request.linkClass);
-            sendResponse({ links: links });
-            if (links.length === 0) {
-            	console.log('bgTabHlpr >> Extracting error.');
-            } else {
-            	console.log('bgTabHlpr >> Extraction completed.');
-            }
-        }
-    );
-    console.log('bgTabHlpr >> Content.js script is initialized.');
+    var messagePort = chrome.runtime.connect({ name: 'giveUrls' });
+    /**
+     * extracted links
+     * @type {Array}
+     */
+    var links = extractLinks();
+    // sending links to background.js
+    if (links.length !== 0) {
+        messagePort.postMessage({
+            links: links
+        });
+        console.log('bgTabOpnr >> Extracted links were passed to background.js.');
+    } else {
+        console.log('bgTabOpnr >> Nth is passed to background.js, since number of extracted links: ' + links.length);
+    }
+    console.log('bgTabOpnr >> Content.js script is finished.');
 })();
