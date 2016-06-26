@@ -9,19 +9,14 @@
 <body>
     <div class="container">
         <div class="row">
-            <form>
-                <div class="form-group">
-                    <label for="start">Start:</label>
-                    <input type="number" value="0" id="start">
-                </div>
-                <div class="form-group">
-                    <label for="start">End:</label>
-                    <input type="number" value="10" id="end">
-                </div>
-                <div class="form-group">
-                    <button id="button">Open Tabs!</button>
-                </div>
-            </form>
+            <fieldset>
+                <legend>Open background tabs</legend>
+                <label for="start">Start:</label>
+                <input type="number" value="0" min="0" step="1" id="start">
+                <label for="start">End:</label>
+                <input type="number" value="10" min="0" step="1" id="end">
+                <button id="button">Open 'em!</button>
+            </fieldset>
         </div>
     </div>
     <script src="popup.js"></script>
