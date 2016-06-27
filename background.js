@@ -26,7 +26,7 @@ chrome.runtime.onConnect.addListener(function(messagePort) {
         if (end > len) {
             end = len;
         }
-        for (var i = start; i <= end; i++) {
+        for (var i = start; i < end; i++) {
             openTab(message.links[i]);
         }
     });
