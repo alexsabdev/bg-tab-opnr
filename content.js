@@ -1,8 +1,8 @@
 (function() {
     'use strict';
-    console.log('bgTabHlpr >> Running content.js script...');
+    console.log('bgTabOpnr >> Running content.js script...');
     /**
-     * extracting links from DOM based on specific algorithm
+     * extracting links from DOM based on specific algorithm; you should paste yours.
      * @param  {String} linkClass css class
      * @return {Array}           array of links
      */
