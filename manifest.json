@@ -12,5 +12,12 @@
 		"scripts": ["background.js"]
 	//	"persistent": false
 	},
-	"permissions": ["tabs", "*://*/*"]
+	  "content_scripts": [
+	    {
+	      "matches": ["https://www.datanyze.com/admin/?tab=tech_requests&tr_id=*"],
+	      "css": ["checker/checker.css"],
+	      "js": ["checker/checker.js"]
+	    }
+	  ],
+	"permissions": ["tabs", "*://*/*", "http://techlookup.herokuapp.com/"]
 }
