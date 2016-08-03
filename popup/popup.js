@@ -6,5 +6,6 @@
 		var start = document.querySelector('#start').value;
 		var end = document.querySelector('#end').value;
 		backgroundpage.handleButtonClick(start, end);
-	});
+	})
+
 })();
